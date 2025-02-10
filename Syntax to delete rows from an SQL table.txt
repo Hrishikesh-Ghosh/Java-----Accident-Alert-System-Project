@@ -1,0 +1,20 @@
+1) Delete based on timestamp (works only for tables with a timestamp column)
+
+DELETE FROM [table name] WHERE timestamp >= '[Date] [Time]';
+Example:
+DELETE FROM IncidentReport WHERE timestamp >= '2024-11-01 10:56:14';
+
+2) Delete the most recent entries
+
+ -- Delete the last 5 rows in GPSLog
+DELETE FROM GPSLog ORDER BY log_id DESC LIMIT 5;
+
+-- Delete the last 5 rows in IncidentReport
+DELETE FROM IncidentReport ORDER BY report_id DESC LIMIT 5;
+
+
+3) Delete based on user id (don't use this method)
+
+-- Delete entries for a specific user_id in GPSLog and IncidentReport
+DELETE FROM GPSLog WHERE user_id = 1;  -- Replace with the actual user_id
+DELETE FROM IncidentReport WHERE user_id = 1;

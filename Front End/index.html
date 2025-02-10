@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Alert System</title>
+    <link rel="stylesheet" href="styles.css">
+   <!-- Link to Leaflet.js CSS and JS via CDN -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="script.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="status-panel">
+            <h2>System Status</h2>
+            <div class="status-indicator">
+                <div id="connectionDot" class="indicator-dot inactive"></div>
+                <span>Device Connection</span>
+            </div>
+            <div class="status-indicator">
+                <div id="locationDot" class="indicator-dot inactive"></div>
+                <span>GPS Signal</span>
+            </div>
+            <div class="status-indicator">
+                <div id="monitoringDot" class="indicator-dot inactive"></div>
+                <span>Accident Detection Active</span>
+            </div>
+        </div>
+
+        <div id="map" class="map-container"></div>
+
+        <div class="info-panel">
+            <div class="current-status">
+                <h3>Current Location:</h3>
+                <p id="location">Acquiring location...</p>
+                <h3>Current Speed:</h3>
+                <p id="speed">0 km/h</p>
+            </div>
+
+            <div class="sensor-readings">
+                <h3>Sensor Data</h3>
+                <div class="reading-item">
+                    <strong>Accelerometer:</strong>
+                    <div id="accelerometer">Not available</div>
+                </div>
+                <div class="reading-item">
+                    <strong>Gyroscope:</strong>
+                    <div id="gyroscope">Not available</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="emergency-button" onclick="manualEmergency()">
+            TRIGGER EMERGENCY ALERT
+        </button>
+
+        <div id="alertMessage" class="alert">
+            Alert! Emergency services have been notified.
+        </div>
+    </div>
+    <script>
+        // Initialize the map and set its view to a specific location
+        const map = L.map('map').setView([51.505, -0.09], 13); // Coordinates for London
+
+        // Add OpenStreetMap tiles to the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker at the specified location
+        const marker = L.marker([12.81, 80.04]).addTo(map);
+
+        // Add a popup to the marker
+        marker.bindPopup("<b>This is my current location!.").openPopup();
+    </script>
+    
+</body>
+</html>
